@@ -1,0 +1,59 @@
+version: '3.8'
+services:
+  mongodb:
+    image: mongo:latest
+    ports:
+      - "27017:27017"
+    environment:
+      - MONGO_INITDB_ROOT_USERNAME=admin
+      - MONGO_INITDB_ROOT_PASSWORD=admin
+    volumes:
+      - ./data/:/data/db
+  redis:
+    image: redis:latest
+    container_name: redis
+    ports:
+      - "6379:6379"
+    command: [ "redis-server", "--save", "60", "1", "--loglevel", "warning" ]
+    volumes:
+      - redis_data:/data
+
+  django-backend:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    image: django-backend:latest
+    command: >
+      /bin/sh -c "
+      python manage.py migrate &&
+      python manage.py runserver 0.0.0.0:8010
+      "
+    restart: always
+    ports:
+      - 8010:8010
+    environment:
+      - WAIT_FOR_REDIS=true
+      - WAIT_FOR_DB=true
+    depends_on:
+      - redis
+      - mongodb
+
+  celery:
+    build: ./
+    restart: always
+    command: celery -A djangoProject worker -l info
+    depends_on:
+      - redis
+
+  celery-beat:
+    build: ./
+    restart: always
+    command: celery -A djangoProject beat -l info
+    depends_on:
+      - redis
+
+volumes:
+  redis_data:
+    driver: local
+  mongo-data:
+    driver: local
