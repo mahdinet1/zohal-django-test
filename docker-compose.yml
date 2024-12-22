@@ -8,6 +8,8 @@ services:
       - MONGO_INITDB_ROOT_USERNAME=admin
       - MONGO_INITDB_ROOT_PASSWORD=admin
     volumes:
+      - ./transactions.agz:/import/transactions.agz  # Mount to /import
+      - ./mongorestore.sh:/docker-entrypoint-initdb.d/mongorestore.sh
       - ./data/:/data/db
   redis:
     image: redis:latest
