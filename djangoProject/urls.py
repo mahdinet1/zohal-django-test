@@ -24,9 +24,6 @@ from transactions.views import TransactionViewSet, CachedReportView
 urlpatterns = [
     path('admin/', admin.site.urls),
     path("transactions/", TransactionViewSet.as_view(), name="transactions"),
-    path('transactions/add/', TransactionViewSet.as_view(), {'action': 'add'}, name='transaction-add'),
-    path('transactions/bulk-insert/', TransactionViewSet.as_view(), {'action': 'bulk-insert'},
-         name='transaction-bulk-insert'),
     path('notification/send/', NotificationView.as_view(), name='notification-send'),
 
     path('transactions/cached-report',CachedReportView.as_view(), name='transactions-cached-report'),

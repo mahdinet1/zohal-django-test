@@ -1,0 +1,117 @@
+{
+	"info": {
+		"_postman_id": "80c53648-f022-40a5-b67d-7e7be72bbe02",
+		"name": "zohal",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "18598232",
+		"_collection_link": "https://universal-shuttle-643746.postman.co/workspace/zohal-test~6f89cfbf-e219-4e21-b7dc-122c7625bc19/collection/18598232-80c53648-f022-40a5-b67d-7e7be72bbe02?action=share&source=collection_link&creator=18598232"
+	},
+	"item": [
+		{
+			"name": "Get-transactions",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8010/transactions/?mode=daily&type=count",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8010",
+					"path": [
+						"transactions",
+						""
+					],
+					"query": [
+						{
+							"key": "mode",
+							"value": "daily",
+							"description": "this field is requiered => daily, weekly or monthly"
+						},
+						{
+							"key": "type",
+							"value": "count",
+							"description": "this field is requiered => amount or count"
+						},
+						{
+							"key": "merchantId",
+							"value": "",
+							"description": "you can ignore this field",
+							"disabled": true
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get--cached-transactions",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8010/transactions/?mode=daily&type=count",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8010",
+					"path": [
+						"transactions",
+						""
+					],
+					"query": [
+						{
+							"key": "mode",
+							"value": "daily",
+							"description": "this field is requiered => daily, weekly or monthly"
+						},
+						{
+							"key": "type",
+							"value": "count",
+							"description": "this field is requiered => amount or count"
+						},
+						{
+							"key": "merchantId",
+							"value": "",
+							"description": "you can ignore this field",
+							"disabled": true
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "POST-send notif",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"notification_id\":\"\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8010/notification/send/",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8010",
+					"path": [
+						"notification",
+						"send",
+						""
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}
